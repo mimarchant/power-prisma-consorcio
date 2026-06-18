@@ -36,7 +36,7 @@ CnsInput();
 | `helper` | string | - | Texto de ayuda bajo el input |
 | `validation` | string | - | Mensaje de validación o error |
 | `placeholder` | string | - | Texto cuando no hay valor ingresado |
-| `required` | boolean | - | Campo obligatorio (muestra "requerido") |
+| `required` | boolean | - | Campo obligatorio (muestra texto "requerido" en rojo) |
 | `disabled` | boolean | - | Deshabilita el componente |
 | `readonly` | boolean | - | Solo lectura, sin edición |
 | `size` | string | - | Altura en px: `40`, `48`, `56` |
@@ -46,7 +46,7 @@ CnsInput();
 | `iconleft` | string | - | Ícono SVG a la izquierda |
 | `iconright` | string | - | Ícono SVG a la derecha |
 | `type` | string | - | Tipo de input: `text`, `password`, `number`, `email`, `phone`, `rut`, `miles`, `date`, `time` |
-| `value` | any | - | Valor actualmente ingresado |
+| `value` | string | - | Valor actualmente ingresado (solo para inicializar; no usar para binding reactivo) |
 | `showTooltip` | boolean | - | Muestra ícono de tooltip |
 | `optional` | boolean | - | Campo opcional (muestra "opcional") |
 | `optionalText` | string | - | Texto personalizado para opcional/requerido |
@@ -59,16 +59,107 @@ CnsInput();
 | `id` | string | - | Identificador único (accesibilidad y testing) |
 | `name` | string | - | Nombre del campo en formularios |
 
+## Lectura de valores (patrón obligatorio)
+
+`cns-input` es un **web component nativo** (`defineCustomElement` + Shadow DOM). Esto tiene implicancias directas en cómo se leen los valores:
+
+### ⚠️ v-model NO funciona
+
+Con `isCustomElement: tag => tag.includes('cns-')` en `vite.config.js`, Vue trata los tags `cns-*` como custom elements del DOM. Esto significa:
+
+- **`v-model` no establece binding bidireccional** — Vue no lo procesa como componente Vue
+- **`@input` con `e.detail`** captura el evento nativo `input` del `<input>` interno del Shadow DOM, no el `CustomEvent` del componente. El valor en `e.detail` puede ser `undefined` o un array, no un string
+- **`:value` como prop reactiva** puede causar warnings de tipo (`Expected String, got Array`)
+
+### ✅ Patrón recomendado: leer del Shadow DOM
+
+La forma confiable de obtener el valor es acceder directamente al `<input>` dentro del Shadow DOM al momento de necesitar el dato (ej: al enviar un formulario):
+
+```js
+const getValue = (id) => {
+  const el = document.querySelector(`#${id}`)
+  return el?.shadowRoot?.querySelector('input')?.value ?? ''
+}
+```
+
+### Ejemplo completo de formulario
+
+```vue
+<template>
+  <section>
+    <cns-input
+      id="nombre"
+      label="Nombre"
+      type="text"
+      placeholder="Ej: Juan"
+      size="56"
+    ></cns-input>
+
+    <cns-input
+      id="rut"
+      label="RUT"
+      type="rut"
+      helper="Ingresa tu RUT sin puntos ni guión"
+      size="56"
+    ></cns-input>
+
+    <cns-input
+      id="email"
+      label="Correo electrónico"
+      type="email"
+      placeholder="correo@ejemplo.cl"
+      size="56"
+    ></cns-input>
+
+    <cns-button
+      variant="primary"
+      color="azul"
+      size="56"
+      label="Enviar"
+      fullwidth
+      @cnsclick="submitForm"
+    ></cns-button>
+  </section>
+</template>
+
+<script setup>
+const getValue = (id) => {
+  const el = document.querySelector(`#${id}`)
+  return el?.shadowRoot?.querySelector('input')?.value ?? ''
+}
+
+const submitForm = () => {
+  const data = {
+    nombre: getValue('nombre'),
+    rut: getValue('rut'),
+    email: getValue('email'),
+  }
+  console.log('Formulario enviado:', data)
+}
+</script>
+```
+
+### Resumen de qué NO hacer
+
+```vue
+<!-- ❌ v-model no funciona con custom elements -->
+<cns-input v-model="nombre" />
+
+<!-- ❌ :value reactivo causa warnings de tipo -->
+<cns-input :value="nombre" />
+
+<!-- ❌ @input con e.detail no entrega el valor esperado -->
+<cns-input @input="(e) => nombre = e.detail" />
+```
+
 ## Eventos
 
 | Evento | Descripción |
 |--------|-------------|
-| `input` | Se emite cada vez que el valor cambia |
+| `input` | Se emite internamente pero **no es confiable** para leer valores desde Vue (ver sección anterior) |
 | `focus` | Se emite cuando el input recibe foco |
 | `blur` | Se emite cuando el input pierde foco |
 | `change` | Se emite cuando el valor cambia y pierde foco |
-| `update:value` | Compatible con v-model |
-| `update:modelValue` | Compatible con v-model |
 
 ## Tipos especiales
 
@@ -79,7 +170,7 @@ CnsInput();
 | `number` | Solo números |
 | `email` | Formato de correo |
 | `phone` | Formato de teléfono |
-| `rut` | Formato RUT chileno con validación |
+| `rut` | Formato RUT chileno con validación incorporada |
 | `miles` | Formato numérico con separador de miles |
 | `date` | Selector de fecha |
 | `time` | Selector de hora |
@@ -104,15 +195,6 @@ CnsInput();
   type="text"
 ></cns-input>
 
-<!-- Requerido -->
-<cns-input
-  id="email"
-  label="Correo electrónico"
-  type="email"
-  required
-  placeholder="correo@ejemplo.cl"
-></cns-input>
-
 <!-- Con prefix y suffix -->
 <cns-input
   id="monto"
@@ -122,7 +204,7 @@ CnsInput();
   suffix="CLP"
 ></cns-input>
 
-<!-- RUT -->
+<!-- RUT (formato y validación incorporada) -->
 <cns-input
   id="rut"
   label="RUT"
@@ -164,13 +246,6 @@ CnsInput();
   helper="Selecciona tu fecha"
 ></cns-input>
 
-<!-- Time -->
-<cns-input
-  id="hora"
-  label="Hora"
-  type="time"
-></cns-input>
-
 <!-- Phone -->
 <cns-input
   id="telefono"
@@ -179,7 +254,7 @@ CnsInput();
   helper="Ingresa tu número"
 ></cns-input>
 
-<!-- Tamaño 40 -->
+<!-- Tamaño compacto -->
 <cns-input
   id="compact"
   label="Compacto"
@@ -195,7 +270,7 @@ CnsInput();
   disabled
 ></cns-input>
 
-<!-- Readonly -->
+<!-- Readonly con valor inicial -->
 <cns-input
   id="readonly"
   label="Solo lectura"
