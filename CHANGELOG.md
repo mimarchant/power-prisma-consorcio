@@ -5,7 +5,15 @@ Cuando se publica una versión nueva (tag/release en GitHub), el equipo debe
 
 ## [Unreleased]
 ### Added
--
+- `prisma-forms.md` (inclusion: manual): guía completa para construir formularios validados
+  con vee-validate + Yup sobre componentes `cns-` (Shadow DOM) en Vue 3. Cubre:
+  - Puente `event.detail` → `useField` para sincronizar valores con vee-validate.
+  - Captura de eventos del Shadow DOM con `capture: true`.
+  - Timing con `nextTick` al hidratar o precargar valores programáticos.
+  - Validación de RUT chileno con algoritmo módulo 11 y dígito verificador.
+  - Selectores en cascada (región → ciudad → comuna) con watchers y reset de hijos.
+  - Esquemas dinámicos con `yup.lazy` + `useFieldArray` para listas variables.
+  - Checklist para cotizadores multi-paso con `cns-stepper`.
 
 ### Changed
 -
