@@ -1,0 +1,13 @@
+{
+  "name": "Prisma scaffold on new component",
+  "description": "Al crear un nuevo .vue, recuerda usar componentes cns- y tokens del design system Prisma y cargar el steering relevante.",
+  "version": "1",
+  "when": {
+    "type": "fileCreated",
+    "patterns": ["src/**/*.vue"]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Se creó un nuevo archivo .vue. Si vas a construir UI en él, usa el design system Prisma (componentes cns-) en vez de HTML/CSS desde cero: botones cns-button, inputs cns-input, etc. Aplica tokens --cns-* y clases utilitarias cns-* (spacing, tipografía, grid). Antes de implementar un componente, carga su steering del power prisma-consorcio (p. ej. prisma-button.md, prisma-input.md). Si es un formulario, consulta prisma-forms.md; si dudas qué componente usar, prisma-decisions.md; si es para Modyo, respeta prisma-modyo.md (sin imports dinámicos). No generes nada todavía si el archivo está vacío y no hay instrucción concreta: solo deja esto presente como contexto."
+  }
+}

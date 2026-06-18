@@ -1,0 +1,13 @@
+{
+  "name": "Prisma cns- conventions on save",
+  "description": "Al guardar un .vue, revisa el cumplimiento de las convenciones del design system Prisma (eventos cns-, overlays, tokens, accesibilidad).",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": ["**/*.vue"]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Se guardó un archivo .vue. Si usa componentes cns- del design system Prisma, revisa SOLO ese archivo contra estas convenciones y propone correcciones puntuales (no reescribas todo, no toques lógica no relacionada):\n1. Eventos: <cns-button> debe usar @cnsclick, no @click. El valor de los componentes cns- llega en event.detail, no en event.target.value.\n2. Overlays: <cns-modal> usa :showModal + @close; <cns-panel> usa :show + @close (no v-show). Sus botones en slot=\"footer\" deben tener fullwidth. Acciones irreversibles → interruptLevel=\"high\".\n3. Estilos: usar tokens --cns-* y clases cns-* en vez de valores hex o px sueltos.\n4. Selector/Stepper: :values/:steps deben ser JSON válido (comillas dobles internas).\n5. Accesibilidad: inputs con label; estados error reflejados en las props del componente (:error/:validation).\n6. RUT/montos: usar cns-input type=\"rut\" / type=\"miles\" en vez de regex o formato manual.\nSi todo está correcto, dilo en una línea y no cambies nada. Si hay dudas sobre un componente, consulta su steering correspondiente del power prisma-consorcio."
+  }
+}
