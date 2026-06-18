@@ -1,8 +1,5 @@
 # Changelog
 
-Todos los cambios relevantes de este power se documentan aquí.
-Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/).
-
 Cuando se publica una versión nueva (tag/release en GitHub), el equipo debe
 **reimportar el power** en Kiro para recibir los cambios.
 
