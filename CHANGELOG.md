@@ -3,6 +3,15 @@
 Cuando se publica una versión nueva (tag/release en GitHub), el equipo debe
 **reimportar el power** en Kiro para recibir los cambios.
 
+## [Unreleased]
+### Changed
+- `prisma-utilidades.md`: agregada sección de clases utilitarias de color (`.font-{nombre}-{tono}`,
+  `.bg-{nombre}-{tono}`) como alternativa a las variables CSS `var(--cns-*)`. Incluye tabla de
+  clases Primary (brand 10-100) y guía de cuándo usar clases vs variables.
+- `prisma-utilidades.md`: corregida sección "Layout y Visibilidad" — las clases `cns-flex-*`,
+  `cns-w-*` existen en el CSS pero no funcionan correctamente; se mantiene la recomendación
+  de usar CSS propio.
+
 ## [1.0.1]
 ### Added
 - `prisma-forms.md` (inclusion: manual): guía completa para construir formularios validados
