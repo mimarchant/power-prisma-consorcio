@@ -328,3 +328,38 @@ Formato: tamaño(px)/line-height(px). Los tamaños son responsivos automáticame
 ```
 
 Se puede combinar cualquier clase de fuente (`cns-font-*`) con cualquier tamaño (`cns-text-*`, `cns-head-*`, etc.).
+
+
+---
+
+## Layout y Visibilidad (sin clases utilitarias dedicadas)
+
+El UI Kit V6 **no provee** clases utilitarias para:
+- Display (`flex`, `grid`, `block`, `none`)
+- Visibilidad responsive (ocultar en mobile, mostrar en desktop)
+- Alineación de texto (`text-center`, `text-left`, `text-right`)
+- Flexbox helpers (`justify-content`, `align-items`, `gap`)
+
+Resolver estos patrones con CSS propio usando tokens de spacing:
+
+```css
+/* Layout flex con spacing del design system */
+.mi-layout {
+  display: flex;
+  gap: 16px; /* spacing-16 */
+  align-items: center;
+}
+
+/* Ocultar en mobile */
+@media (max-width: 575px) {
+  .solo-desktop { display: none; }
+}
+
+/* Ocultar en desktop */
+@media (min-width: 576px) {
+  .solo-mobile { display: none; }
+}
+```
+
+Usar `matchMedia` en JS si la lógica de visibilidad afecta a datos o lógica de negocio,
+no solo presentación (ver guía de `matchMedia` del equipo).

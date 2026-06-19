@@ -2,7 +2,7 @@
 name: "prisma-consorcio"
 displayName: "Prisma (UI Kit V6) — Consorcio"
 description: "Design system de Consorcio: web components cns- (Shadow DOM), tokens y utilidades para Vue 3"
-keywords: ["prisma", "ui-kit", "consorcio", "cns", "design system", "web components", "vue", "componentes", "shadow dom", "ui kit v6"]
+keywords: ["prisma", "ui-kit", "consorcio", "cns", "design system", "web components", "vue", "componentes", "shadow dom", "ui kit v6", "formulario", "form", "vee-validate", "modal", "button", "input", "selector", "stepper", "tabs", "accordion", "token", "layout"]
 author: "Equipo Sitios / Miguel Marchant"
 ---
 
@@ -41,12 +41,14 @@ o estilos, cargar el steering del componente correspondiente y respetar sus prop
 - Modales (interruptLevel, states) → `prisma-modal.md`
 - Panel deslizante lateral → `prisma-panel.md`
 - Tabs (horizontal/vertical, azul/cielo) → `prisma-tabs.md`
+- Formularios validados (vee-validate + Yup + Shadow DOM) → `prisma-forms.md`
 - Acordeón / patrón FAQ + JSON-LD → `prisma-accordion.md`
 - Stepper / flujos secuenciales multi-paso → `prisma-stepper.md`
 - Tags / etiquetas / chips (readonly, primary, secondary) → `prisma-tag.md`
 - LinkCard / tarjeta-enlace → `prisma-linkcard.md`
 - ProgressSpinner (determinate/indeterminate) → `prisma-progressspinner.md`
 - PageLoader / carga de pantalla completa → `prisma-pageloader.md`
+- Patrones sin componente (tooltip, toast, skeleton, breadcrumb, table, pagination) → `prisma-no-component.md`
 
 ## Reglas mínimas (siempre)
 

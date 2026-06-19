@@ -88,6 +88,9 @@ CnsAccordion();
 
 ## Patrón FAQ con JSON-LD (Vue 3)
 
+Para secciones de preguntas frecuentes, combinar el acordeón con datos estructurados `FAQPage`
+para SEO. El JSON-LD se inyecta con `<component :is="'script'">` reactivo al listado de FAQs.
+
 ```vue
 <template>
   <section>
@@ -99,14 +102,39 @@ CnsAccordion();
     >
       <p>{{ faq.answer }}</p>
     </cns-accordion>
+
+    <!-- JSON-LD para SEO (FAQPage) -->
+    <component :is="'script'" type="application/ld+json">
+      {{ faqSchema }}
+    </component>
   </section>
 </template>
 
 <script setup>
+import { computed } from 'vue'
+
 const faqs = [
   { question: '¿Cómo contrato?', answer: 'Ingresa a la sucursal virtual...' },
   { question: '¿Cuáles son los requisitos?', answer: 'Debes ser mayor de 18...' },
   { question: '¿Tiene costo?', answer: 'No tiene costo de mantención...' },
 ]
+
+const faqSchema = computed(() =>
+  JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  })
+)
 </script>
 ```
+
+> Si los FAQs vienen de un CMS o API, pasar `faqs` como prop y hacer el `computed` reactivo
+> a esa prop. Validar con [Rich Results Test](https://search.google.com/test/rich-results).

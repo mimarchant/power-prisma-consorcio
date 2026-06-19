@@ -21,7 +21,9 @@ power-prisma-consorcio/
 └── steering/
     ├── prisma-conventions.md # reglas transversales (eventos, overlays, v-model, Chile)
     ├── prisma-instalacion.md
-    ├── prisma-utilidades.md  # tokens, grid, tipografía, spacing, sombras
+    ├── prisma-utilidades.md  # tokens, grid, tipografía, spacing, sombras, layout
+    ├── prisma-forms.md       # formularios validados (vee-validate + Yup + Shadow DOM)
+    ├── prisma-no-component.md # patrones sin componente cns- (tooltip, toast, table, etc.)
     └── prisma-<componente>.md (button, input, modal, panel, tabs, ...)
 ```
 

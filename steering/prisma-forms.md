@@ -7,6 +7,11 @@ Cómo construir formularios validados sobre componentes `cns-` (Shadow DOM) en V
 Stack: **vee-validate + Yup**, Composition API, `<script setup>`. Si el proyecto migró a
 otra librería de validación, actualizar este archivo antes de usarlo.
 
+> **Origen de esta guía**: Los patrones aquí documentados se extrajeron de implementaciones
+> reales en producción (cotizadores multi-paso). No provienen del Storybook oficial de Prisma
+> sino de la experiencia resolviendo la integración vee-validate + Shadow DOM en proyectos
+> del equipo. Validar contra la versión actual del componente si hay discrepancias.
+
 > El reto central: los `cns-` son web components con Shadow DOM. vee-validate no "ve"
 > sus inputs internos, así que el puente entre el evento del componente y el estado del
 > formulario hay que cablearlo explícitamente.
