@@ -84,6 +84,57 @@ Escala basada en múltiplos de 8 (misma regla que spacing).
 
 Cada semántico tiene escala completa de 10 a 100.
 
+### Clases utilitarias de color
+
+Además de las variables CSS (`var(--cns-*)`), el UI Kit provee **clases directas** para aplicar
+colores como texto o fondo sin necesidad de escribir CSS custom:
+
+**Texto**: `.font-{nombre}-{tono}` → aplica `color`
+**Fondo**: `.bg-{nombre}-{tono}` → aplica `background-color`
+
+#### Primary
+
+| Clase texto | Clase fondo | Color |
+|-------------|-------------|-------|
+| `.font-brand-10` | `.bg-brand-10` | #F2F5F7 |
+| `.font-brand-20` | `.bg-brand-20` | #E6EAEE |
+| `.font-brand-30` | `.bg-brand-30` | #D6DEE4 |
+| `.font-brand-40` | `.bg-brand-40` | #B0BFCB |
+| `.font-brand-50` | `.bg-brand-50` | #003058 (azul principal) |
+| `.font-brand-60` | `.bg-brand-60` | #002B4F |
+| `.font-brand-70` | `.bg-brand-70` | #002646 |
+| `.font-brand-80` | `.bg-brand-80` | #001D35 |
+| `.font-brand-90` | `.bg-brand-90` | #001628 |
+| `.font-brand-100` | `.bg-brand-100` | #00111F |
+
+Misma convención para `marino`, `cielo`, `arena`, `calypso`, `lima`, `morado` (ej: `.font-marino-50`, `.bg-cielo-30`).
+
+#### Cuándo usar clases vs variables
+
+| Situación | Usar |
+|-----------|------|
+| Color directo en HTML (sin CSS custom) | Clase: `<p class="font-brand-50">` |
+| Color en estilos de un componente (scoped CSS) | Variable: `color: var(--cns-primary-brand-50)` |
+| Color dinámico (condicional en JS) | Variable con style binding: `:style="{ color: 'var(--cns-primary-brand-50)' }"` |
+
+#### Ejemplo
+
+```html
+<!-- Con clases utilitarias -->
+<h2 class="cns-head-2 cns-font-semibold font-brand-50">Título azul</h2>
+<section class="bg-brand-10 cns-p24">
+  <p class="font-marino-90">Texto sobre fondo claro</p>
+</section>
+
+<!-- Con variables CSS (en <style>) -->
+<style scoped>
+.mi-seccion {
+  background-color: var(--cns-primary-brand-10);
+  color: var(--cns-primary-marino-90);
+}
+</style>
+```
+
 ### Guía de uso por contexto
 
 | Color | Cuándo usar | Ejemplo |
@@ -334,11 +385,9 @@ Se puede combinar cualquier clase de fuente (`cns-font-*`) con cualquier tamaño
 
 ## Layout y Visibilidad (sin clases utilitarias dedicadas)
 
-El UI Kit V6 **no provee** clases utilitarias para:
-- Display (`flex`, `grid`, `block`, `none`)
-- Visibilidad responsive (ocultar en mobile, mostrar en desktop)
-- Alineación de texto (`text-center`, `text-left`, `text-right`)
-- Flexbox helpers (`justify-content`, `align-items`, `gap`)
+El UI Kit V6 **no provee** clases utilitarias confiables para layout y visibilidad.
+Aunque existen en el CSS (`cns-flex-*`, `cns-w-*`, etc.), no funcionan correctamente
+y no se recomienda su uso.
 
 Resolver estos patrones con CSS propio usando tokens de spacing:
 
@@ -363,3 +412,4 @@ Resolver estos patrones con CSS propio usando tokens de spacing:
 
 Usar `matchMedia` en JS si la lógica de visibilidad afecta a datos o lógica de negocio,
 no solo presentación (ver guía de `matchMedia` del equipo).
+
