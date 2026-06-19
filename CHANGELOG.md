@@ -3,6 +3,20 @@
 Cuando se publica una versión nueva (tag/release en GitHub), el equipo debe
 **reimportar el power** en Kiro para recibir los cambios.
 
+## [Unreleased]
+### Added
+- `hooks/validate-prisma-conventions.json`: hook de Kiro que valida convenciones Prisma al
+  editar archivos `.vue`. Detecta hex directos, `resize` listener, `v-model` en `cns-`,
+  `@click` en `cns-button`, y estilos apuntando a internals del Shadow DOM. Solo sugiere,
+  no modifica código.
+- `hooks/README.md`: instrucciones de instalación de hooks en proyectos del equipo.
+
+### Changed
+-
+
+### Fixed
+-
+
 ## [1.0.1]
 ### Added
 - `prisma-forms.md` (inclusion: manual): guía completa para construir formularios validados

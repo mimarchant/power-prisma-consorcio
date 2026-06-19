@@ -1,0 +1,15 @@
+{
+    "name": "Validar convenciones Prisma",
+    "version": "1.0.0",
+    "description": "Al editar un archivo .vue, revisa si se usan valores hex directos en vez de tokens --cns-*, addEventListener('resize') en vez de matchMedia, o v-model en componentes cns-. Solo sugiere correcciones, no modifica código.",
+    "when": {
+        "type": "fileEdited",
+        "patterns": [
+            "*.vue"
+        ]
+    },
+    "then": {
+        "type": "askAgent",
+        "prompt": "Revisa el archivo editado buscando estas violaciones a las convenciones de Prisma:\n1. Valores hexadecimales directos (#fff, #003058, rgb(), rgba()) → sugerir el token --cns-* correspondiente.\n2. window.addEventListener('resize', ...) → sugerir matchMedia con el breakpoint adecuado.\n3. v-model en componentes cns-input, cns-selector, cns-textarea → sugerir leer desde shadowRoot o usar vee-validate con event.detail.\n4. @click en cns-button → sugerir @cnsclick.\n5. Estilos que apuntan a clases internas del Shadow DOM (.panel__header, .modal__body, etc.) → sugerir usar props/slots expuestos.\n\nSi no encuentra ninguna violación, no reportes nada. Si encuentra alguna, muestra la línea y sugiere la corrección específica."
+    }
+}

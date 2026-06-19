@@ -18,6 +18,9 @@ En el IDE: **Add Custom Power → Import power from GitHub** y pega la URL de es
 ```
 power-prisma-consorcio/
 ├── POWER.md                  # metadata + onboarding + mapeo de carga
+├── hooks/
+│   ├── README.md             # instrucciones de instalación de hooks
+│   └── validate-prisma-conventions.json  # hook para validar convenciones al editar .vue
 └── steering/
     ├── prisma-conventions.md # reglas transversales (eventos, overlays, v-model, Chile)
     ├── prisma-instalacion.md
@@ -26,6 +29,13 @@ power-prisma-consorcio/
     ├── prisma-no-component.md # patrones sin componente cns- (tooltip, toast, table, etc.)
     └── prisma-<componente>.md (button, input, modal, panel, tabs, ...)
 ```
+
+## Hooks recomendados
+
+El directorio `hooks/` contiene hooks de Kiro listos para copiar a `.kiro/hooks/` de tu proyecto.
+Son opcionales y solo sugieren correcciones (no modifican código automáticamente).
+
+Ver [`hooks/README.md`](hooks/README.md) para instrucciones de instalación.
 
 ## Mantención
 
