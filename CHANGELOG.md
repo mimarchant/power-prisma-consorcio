@@ -4,6 +4,16 @@ Cuando se publica una versión nueva (tag/release en GitHub), el equipo debe
 **reimportar el power** en Kiro para recibir los cambios.
 
 ## [Unreleased]
+### Added
+-
+
+### Changed
+-
+
+### Fixed
+-
+
+## [1.0.2] - 2026-06-19
 ### Changed
 - `prisma-utilidades.md`: agregada sección de clases utilitarias de color (`.font-{nombre}-{tono}`,
   `.bg-{nombre}-{tono}`) como alternativa a las variables CSS `var(--cns-*)`. Incluye tabla de
