@@ -139,7 +139,13 @@ const submitForm = () => {
 </script>
 ```
 
-### Resumen de qué NO hacer
+### Excepción: vee-validate + useField
+
+Cuando se usa **vee-validate** con `useField`, el patrón `@input="(e) => field.value = e.detail"`
+**sí funciona**, porque vee-validate gestiona el estado internamente sin depender del binding DOM
+de Vue hacia el custom element. Ver `prisma-forms.md` para el patrón completo.
+
+### Resumen de qué NO hacer (sin vee-validate)
 
 ```vue
 <!-- ❌ v-model no funciona con custom elements -->
@@ -148,7 +154,7 @@ const submitForm = () => {
 <!-- ❌ :value reactivo causa warnings de tipo -->
 <cns-input :value="nombre" />
 
-<!-- ❌ @input con e.detail no entrega el valor esperado -->
+<!-- ❌ @input con e.detail no entrega el valor esperado en binding directo -->
 <cns-input @input="(e) => nombre = e.detail" />
 ```
 

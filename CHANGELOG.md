@@ -3,7 +3,7 @@
 Cuando se publica una versión nueva (tag/release en GitHub), el equipo debe
 **reimportar el power** en Kiro para recibir los cambios.
 
-## [Unreleased]
+## [1.0.1]
 ### Added
 - `prisma-forms.md` (inclusion: manual): guía completa para construir formularios validados
   con vee-validate + Yup sobre componentes `cns-` (Shadow DOM) en Vue 3. Cubre:
@@ -14,9 +14,19 @@ Cuando se publica una versión nueva (tag/release en GitHub), el equipo debe
   - Selectores en cascada (región → ciudad → comuna) con watchers y reset de hijos.
   - Esquemas dinámicos con `yup.lazy` + `useFieldArray` para listas variables.
   - Checklist para cotizadores multi-paso con `cns-stepper`.
+- Sección "Layout y Visibilidad" en `prisma-utilidades.md`: documenta que no existen clases
+  utilitarias de display/flex/visibility y cómo resolverlo con CSS propio.
 
 ### Changed
--
+- `POWER.md`: ampliadas keywords para activación más agresiva del power; agregado
+  `prisma-forms.md` al mapeo de carga on-demand.
+- `prisma-conventions.md`: agregada nota sobre el origen de los steering (Storybook oficial
+  vs patrones de integración del equipo).
+- `prisma-forms.md`: agregada nota aclarando que los patrones provienen de implementaciones
+  reales, no del Storybook oficial.
+- `prisma-input.md`: agregada sección "Excepción: vee-validate + useField" que aclara que
+  `e.detail` sí funciona cuando se usa vee-validate (resuelve contradicción con prisma-forms).
+- `prisma-accordion.md`: patrón FAQ ahora incluye inyección de JSON-LD `FAQPage` para SEO.
 
 ### Fixed
 -

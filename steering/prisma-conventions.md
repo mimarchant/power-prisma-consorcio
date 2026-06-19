@@ -6,6 +6,12 @@ inclusion: manual
 Reglas duras para usar componentes `cns-` en Vue 3. Son **opinionadas**: no describen todo lo
 posible, sino cómo se hace en este proyecto. Cargar junto al steering del componente puntual.
 
+> **Nota sobre las fuentes**: Los steering individuales de cada componente (`prisma-button.md`,
+> `prisma-modal.md`, etc.) se generaron a partir de la documentación oficial del Storybook de
+> Prisma. Este archivo de convenciones y `prisma-forms.md` se crearon por separado con patrones
+> de integración reales del equipo. Si hay discrepancias entre un steering de componente y el
+> Storybook actual, priorizar el Storybook y actualizar el `.md`.
+
 ## Eventos y Shadow DOM
 
 - Los componentes `cns-` son web components: los datos del evento viajan en `event.detail`,
