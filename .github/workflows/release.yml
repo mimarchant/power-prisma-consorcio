@@ -38,17 +38,29 @@ jobs:
 
           # Extract release notes (between [Unreleased] and next ## [)
           match = re.search(r'## \[Unreleased\]\n(.*?)(?=\n## \[)', content, re.DOTALL)
-          notes = match.group(1).strip() if match else "No release notes."
+          if match:
+              notes = match.group(1).strip()
+              # Remove empty placeholder lines (just "-")
+              notes_clean = "\n".join(
+                  line for line in notes.split("\n")
+                  if line.strip() not in ("-", "")
+                  or line.startswith("###")
+              )
+              with open("release_notes.md", "w") as f:
+                  f.write(notes_clean if notes_clean else "Maintenance release.")
 
-          with open("release_notes.md", "w") as f:
-              f.write(notes)
-
-          # Replace [Unreleased] with version + date
-          content = content.replace(
-              "## [Unreleased]",
-              f"## [Unreleased]\n### Added\n-\n\n### Changed\n-\n\n### Fixed\n-\n\n## [{version}] - {today}",
-              1
-          )
+              # Replace [Unreleased] section with versioned heading
+              # Remove everything from ## [Unreleased] to the next ## [
+              content = re.sub(
+                  r'## \[Unreleased\]\n.*?(?=\n## \[)',
+                  f'## [{version}] - {today}\n' + match.group(1),
+                  content,
+                  count=1,
+                  flags=re.DOTALL
+              )
+          else:
+              with open("release_notes.md", "w") as f:
+                  f.write("Maintenance release.")
 
           with open("CHANGELOG.md", "w") as f:
               f.write(content)
