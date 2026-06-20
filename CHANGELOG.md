@@ -4,6 +4,9 @@ Cuando se publica una versión nueva (tag/release en GitHub), el equipo debe
 **reimportar el power** en Kiro para recibir los cambios.
 
 ## [Unreleased]
+### Added
+- `prisma-migracion-ds5.md` (inclusion: manual): guía de migración DS5 → Prisma con mapeo
+  completo de props, tokens, eventos y ejemplos antes/después para Button, Input y Modal.
 
 ## [1.0.2] - 2026-06-19
 ### Changed

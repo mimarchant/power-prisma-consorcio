@@ -49,6 +49,7 @@ o estilos, cargar el steering del componente correspondiente y respetar sus prop
 - ProgressSpinner (determinate/indeterminate) → `prisma-progressspinner.md`
 - PageLoader / carga de pantalla completa → `prisma-pageloader.md`
 - Patrones sin componente (tooltip, toast, skeleton, breadcrumb, table, pagination) → `prisma-no-component.md`
+- Migración DS5 → Prisma (mapeo de props, tokens, breaking changes) → `prisma-migracion-ds5.md`
 
 ## Reglas mínimas (siempre)
 
